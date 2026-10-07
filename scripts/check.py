@@ -43,8 +43,8 @@ def check_backgrounds():
     import numpy as np
     errs, d = [], os.path.join(ROOT, "backgrounds")
     frames = sorted(f for f in os.listdir(d) if f.lower().endswith((".jpg", ".jpeg", ".png", ".webp")))
-    if not 3 <= len(frames) <= 4:
-        errs.append(f"expected 3 or 4 backgrounds, found {len(frames)}")
+    if not 3 <= len(frames) <= 6:
+        errs.append(f"expected 3 to 6 backgrounds, found {len(frames)}")
     for f in frames:
         im = Image.open(os.path.join(d, f))
         w, h = im.size

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render backgrounds/2-lamplight.webp (lossless) — the theme's own gradient.
+"""Render backgrounds/4-lamplight.webp (lossless) — the theme's own gradient.
 
 A room after midnight, with nothing in it: tungsten light falling in from a
 lamp just off the left edge, cool night from a window somewhere to the
@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from oklch import srgb_to_oklab
 
 W, H = (int(sys.argv[1]), int(sys.argv[2])) if len(sys.argv) > 2 else (3840, 2160)
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, "backgrounds", "2-lamplight.webp")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, "backgrounds", "4-lamplight.webp")
 
 CEILING = "#07070a"  # top edge, darker than darker_background
 SHADOW = "#0f0f12"   # mid-field: graphite in shadow

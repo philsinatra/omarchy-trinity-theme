@@ -274,7 +274,7 @@ def preview():
     border_active = f"linear-gradient(135deg,{p['accent']},{p['blue']})"
     idle = '#' + p['hyprland_inactive_border'].split('(')[1][:6]
     css = f"""
-body{{width:1800px;height:1012px;background:#000 url('file://{ROOT}/backgrounds/1-sangre-de-cristo.jpg') center/cover;
+body{{width:1800px;height:1012px;background:#000 url('file://{ROOT}/backgrounds/1-handwriting.jpg') center/cover;
      font:400 15px/21px {MONO};color:{p['foreground']}}}
 .bar{{position:absolute;left:0;right:0;top:0;height:26px;background:{p['darker_background']}e6;display:flex;
      align-items:center;justify-content:space-between;padding:0 14px;font-size:13px;color:{p['foreground']}}}

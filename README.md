@@ -5,10 +5,10 @@
 A desk theme for [Omarchy](https://omarchy.org/), built for long technical
 work after dark. It imagines the desk J. Robert Oppenheimer might have kept at
 Los Alamos in 1943–45: a blackboard, a lamp, graph paper, a pencil, a
-cigarette, a window at dusk. It draws on the room where the work was done,
-not on anything the work produced. Graphite and low light, one brass lamp,
-New Mexico going dark outside, and ink that stays readable at two in the
-morning.
+cigarette, a window at dusk. It draws on the room where the work was done
+and the tower it was done for, never on the explosion itself. Graphite and
+low light, one brass lamp, New Mexico going dark outside, and ink that stays
+readable at two in the morning.
 
 ## Install
 
@@ -103,20 +103,33 @@ answers; with it, every role is at least two just-noticeable steps away.
 
 ## Backgrounds
 
-Three views from the window, and the lamp.
+The notes on the desk, the marbles that kept count, the lamp, two views from
+the window, and the tower.
 
 | File | Subject | Size | Mean |
 | --- | --- | --- | --- |
-| `1-sangre-de-cristo.jpg` | A full moon over the Sangre de Cristo crest at blue hour — Mike Lewinski, CC BY 2.0 | 5120×2880 | 10% |
-| `2-lamplight.webp` | The theme gradient: tungsten from off-frame left, night to the right, nothing else | 3840×2160 | 10% |
-| `3-gloaming.jpg` | White Sands a few minutes after sunset — Charles & Maggie Boyer, CC BY 2.0 | 3840×2160 | 12% |
-| `4-cabezon.jpg` | Cabezon Peak under a dusk sky — Bob Wick, BLM, public domain | 5120×2880 | 11% |
+| `1-handwriting.jpg` | Dense working notes in a small slanted script, dark ink over black into slate — **the default** | 5120×2880 | 12% |
+| `2-sangre-de-cristo.jpg` | A full moon over the Sangre de Cristo crest at blue hour — Mike Lewinski, CC BY 2.0 | 5120×2880 | 10% |
+| `3-marbles.jpg` | Three glass fishbowls filling with marbles, one lamp — **rendered for this theme** | 3840×2160 | @@MARBLES@@ |
+| `4-lamplight.webp` | The theme gradient: tungsten from off-frame left, night to the right, nothing else | 3840×2160 | 10% |
+| `5-tower.jpg` | The Trinity shot tower against cumulus, July 1945 — Los Alamos, public domain | 3840×2160 | 14% |
+| `6-cabezon.jpg` | Cabezon Peak under a dusk sky — Bob Wick, BLM, public domain | 5120×2880 | 11% |
 
 Every frame keeps its top edge dark (top 8% under 5% mean luminance), so the
-status bar always has contrast. Nothing is upscaled. The photographs are
-cropped and darkened by `scripts/grade.py`. Credits, licences and the full
-list of changes are in [`backgrounds/CREDITS.md`](backgrounds/CREDITS.md).
-Cycle them with `omarchy theme bg next`.
+status bar always has contrast.
+
+- **The handwriting** is a pattern in the manner of Oppenheimer's notebooks,
+  set from an openly licensed script face. It is not his hand: his papers at
+  the Library of Congress are not digitized, and the pages that are online
+  are still in copyright.
+- **The marbles** are an original still life on the film's counting bowls,
+  path-traced with Mitsuba 3 (`scripts/marbles.py`), not a still from it.
+- **The photographs** are cropped and darkened by `scripts/grade.py`. Only
+  the 1945 tower print is enlarged (1.26×), because no larger scan exists.
+
+Credits, licences and the full list of changes are in
+[`backgrounds/CREDITS.md`](backgrounds/CREDITS.md). Cycle the frames with
+`omarchy theme bg next`.
 
 ## Unlock screen
 
@@ -134,19 +147,23 @@ of Oppenheimer's in the footer:
 | `btop.theme` | Omarchy's btop template with red kept for alarms only (generated) |
 | `icons.theme` | `Yaru-yellow-dark` — dark icons, lamp-coloured folders |
 | `keyboard.rgb` | Brass, and nothing else, for RGB keyboards |
-| `backgrounds/` | Four frames — see [`backgrounds/CREDITS.md`](backgrounds/CREDITS.md) |
+| `backgrounds/` | Six frames — see [`backgrounds/CREDITS.md`](backgrounds/CREDITS.md) |
 | `preview.webp`, `docs-palette.webp` | Theme picker thumbnail, palette card |
 | `unlock.png`, `preview-unlock.png` | Boot / disk-unlock (Plymouth) title block and its preview |
 | `scripts/genpalette.py` | OKLCH constants → `colors.toml` and `btop.theme`, with every check above |
 | `scripts/oklch.py` | OKLCH ↔ sRGB, WCAG contrast, OKLab distance; no dependencies (shared with Endurance) |
 | `scripts/check.py` | Palette, background luminance and git-install checks in one run |
-| `scripts/gradient.py` | Renders `2-lamplight.webp` |
+| `scripts/handwriting.py` | Sets `1-handwriting.jpg`: original notes in a script face over a slate gradient |
+| `scripts/marbles.py` | Path-traces `3-marbles.jpg` with Mitsuba 3, then tone-maps it |
+| `scripts/gradient.py` | Renders `4-lamplight.webp` |
 | `scripts/grade.py` | Crops and grades the three photographs; its table is the list of changes |
 | `scripts/photo.py` | Shared fetch, colour and grain helpers |
 | `scripts/cards.py` | Renders the unlock title block, palette card and preview from `colors.toml` (Chromium) |
 
-The background and card scripts need numpy and Pillow; the original
-photographs are fetched once into `scripts/.cache/`, which git ignores.
+The background and card scripts need numpy and Pillow; `marbles.py` also
+needs `mitsuba`, and `grade.py` uses ImageMagick for the 16-bit archival
+scan. Source images, scans and the font are fetched once into
+`scripts/.cache/`, which git ignores.
 `genpalette.py`, `oklch.py` and the palette part of `check.py` need only
 Python.
 
@@ -169,19 +186,23 @@ Python.
    Endurance's.
 7. One file installs everything. No editor-specific code, nothing Omarchy has
    to drop from a git install.
-8. The room, not the event. No clouds, bombs, trefoils, orbits, equations on
-   the wall, insignia or flags. Backgrounds are real places, single-subject,
-   never upscaled, dark at the top edge, and quiet enough to work in front of.
+8. The room and the tower, never the event. No fireball, cloud, crater,
+   trefoil, orbit, insignia or flag. Backgrounds are single-subject, dark at
+   the top edge, quiet enough to work in front of, and either licensed
+   photographs or originals made for the theme. Nothing is upscaled except
+   the one 1945 print that no archive holds larger.
 
 ## License
 
-Theme files and the gradient are MIT — see [`LICENSE`](LICENSE). The White
-Sands and Sangre de Cristo photographs are CC BY 2.0 (Charles & Maggie Boyer;
-Mike Lewinski), modified as listed in
-[`backgrounds/CREDITS.md`](backgrounds/CREDITS.md). The Cabezon Peak
-photograph (Bob Wick, BLM) is in the public domain.
+Theme files, the handwriting pattern, the marbles render and the gradient
+are MIT — see [`LICENSE`](LICENSE). The script face (Herr Von Muellerhoff,
+Alejandro Paul) is under the SIL Open Font License and the desk scan is CC0.
+The Sangre de Cristo photograph is CC BY 2.0 (Mike Lewinski), modified as
+listed in [`backgrounds/CREDITS.md`](backgrounds/CREDITS.md). The tower
+photograph (Los Alamos, 1945) and the Cabezon Peak photograph (Bob Wick, BLM)
+are in the public domain.
 
 Trinity is not affiliated with or endorsed by the estate of J. Robert
 Oppenheimer, Los Alamos National Laboratory, the U.S. Department of Energy,
-the Bureau of Land Management, the National Park Service, or any of the
-photographers.
+the Bureau of Land Management, the National Archives, the makers of the film
+*Oppenheimer*, or any of the photographers.
